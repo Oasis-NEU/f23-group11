@@ -7,7 +7,8 @@ export function App() {
 			<Header />
 			<Paragraph />
 		</div>
-	);
+	)
+	
 }
 
 
