@@ -6,6 +6,7 @@ function App() {
   const [name, setName] = useState(""); // Initialized as an empty string.
   const [ingredients, setIngredients] = useState([]); // Initialized as an empty array.
   const [userIngredients, setUserIngredients] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     getIngredients();
@@ -14,7 +15,7 @@ function App() {
   async function getIngredients() {
     try {
       const { data, error } = await supabase // Destructure the Supabase call
-        .from("Ingredients") // From the "Groceries" table
+        .from("Ingredients") // From the "Ingredeints" table
         .select("*"); // Select (fetch) everything
       if (error) throw error; // If there is an error, throw it
       if (data != null) {
@@ -26,17 +27,26 @@ function App() {
     }
   }
 
-  async function deleteIngredient(id) {
+  async function showRecipes(e) {
+    var options = document.getElementById('select-ingredient').selectedOptions;
+    var values = [];
+    values = Array.from(options).map(({ value }) => value.toString());
     try {
-      const { data, error } = await supabase // Destructure the Supabase call
-        .from("Ingredients") // From our "Groceries" table
-        .delete() // Delete
-        .match({ id: id }); // The item that has the same id as the inputted id
-      if (error) throw error; // If there's an error, throw it
-      window.location.reload(); // Reload the window when finished
-    } catch (error) {
-      alert(error); // If there is an error, alert it on the window.
-    }
+      const {data, error} = await supabase
+      .from("Recipes")
+      .select('recipe_name', 'ingredients')
+      .containedBy('ingredients', values);
+      console.log("options recipes",options);
+      console.log("values recipes",values);
+      console.log("recipes", data);
+      if (error) throw error;
+      if (data != null) {
+        setRecipes(data);
+      }
+     }
+     catch (error) {
+      alert(error);
+     }
   }
 
   async function addIngredient(name) {
@@ -78,7 +88,7 @@ function App() {
 			*/}
       <button onClick={() => addIngredient(name)}>Add Grocery</button>
       <div>
-      <select multiple id="select-ingredient" onChange={(e) => (showUserIngredients(e))}>
+      <select multiple id="select-ingredient" onChange={(e) => (showUserIngredients(e) && showRecipes(e))}>
         {/* Nesting the map within a <ul> so our data is in the form of a list */}
         {ingredients &&
           ingredients.map((ingredient) => (
@@ -93,6 +103,17 @@ function App() {
           <li key={ingredient.id} > 
           {ingredient} </li> )}
         </ul>
+      </div>
+      <div>
+      <ul>
+        {/* Nesting the map within a <ul> so our data is in the form of a list */}
+        {recipes &&
+          recipes.map((recipe) => (
+            <li key={recipe.id}>
+              {recipe.name}
+            </li>
+          ))}
+      </ul>
       </div>
     </>
   );
