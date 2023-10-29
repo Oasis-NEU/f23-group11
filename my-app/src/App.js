@@ -110,7 +110,7 @@ function App() {
         {recipes &&
           recipes.map((recipe) => (
             <li key={recipe.id}>
-              {recipe.name}
+              {recipe.recipe_name}
             </li>
           ))}
       </ul>
