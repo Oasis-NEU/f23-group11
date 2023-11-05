@@ -112,7 +112,7 @@ function App() {
       console.log(recipe.id, recipe.recipe_name, recipe.image_url);
       return (
         <li key={recipe.id} style={{ margin: '0 10px', flexBasis: '25%' }}>
-          {recipe.recipe_name}
+          {<a href={recipe.recipe_url}> {recipe.recipe_name}</a>}
           <p></p><img src={recipe.image_url} alt="cannot display" 
           style={{ width: '400px', height: '400px' }} />
         </li>
