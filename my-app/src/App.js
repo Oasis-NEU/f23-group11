@@ -34,7 +34,7 @@ function App() {
     try {
       const {data, error} = await supabase
       .from("Recipes")
-      .select('recipe_name', 'ingredients')
+      .select('*')
       .containedBy('ingredients', values);
       console.log("options recipes",options);
       console.log("values recipes",values);
@@ -105,15 +105,20 @@ function App() {
         </ul>
       </div>
       <div>
-      <ul>
-        {/* Nesting the map within a <ul> so our data is in the form of a list */}
-        {recipes &&
-          recipes.map((recipe) => (
-            <li key={recipe.id}>
-              {recipe.recipe_name}
-            </li>
-          ))}
-      </ul>
+      <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+  {/* Nesting the map within a <ul> so our data is in the form of a list */}
+  {recipes &&
+    recipes.map((recipe) => {
+      console.log(recipe.id, recipe.recipe_name, recipe.image_url);
+      return (
+        <li key={recipe.id} style={{ margin: '0 10px', flexBasis: '25%' }}>
+          {recipe.recipe_name}
+          <p></p><img src={recipe.image_url} alt="cannot display" 
+          style={{ width: '400px', height: '400px' }} />
+        </li>
+      )
+    })}
+</ul>
       </div>
     </>
   );
