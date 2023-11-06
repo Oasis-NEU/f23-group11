@@ -28,9 +28,8 @@ function App() {
   }
 
   async function showRecipes(e) {
-    var options = document.getElementById('select-ingredient').selectedOptions;
-    var values = [];
-    values = Array.from(options).map(({ value }) => value.toString());
+    var options = document.querySelectorAll('input[type=checkbox]:checked');
+    var values = Array.from(options).map(({ value }) => value.toString());
     try {
       const {data, error} = await supabase
       .from("Recipes")
@@ -63,10 +62,9 @@ function App() {
   }
 
   async function showUserIngredients(e) {
-    var options = document.getElementById('select-ingredient').selectedOptions;
-    var values = Array.from(options).map(({ value }) => value);
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+    var values = Array.from(checkboxes).map(({ value }) => value);
     setUserIngredients(values);
-    console.log("options",options);
     console.log("values",values);
   }
 
@@ -88,14 +86,22 @@ function App() {
 			*/}
       <button onClick={() => addIngredient(name)}>Add Grocery</button>
       <div>
-      <select multiple id="select-ingredient" onChange={(e) => (showUserIngredients(e) && showRecipes(e))}>
-        {/* Nesting the map within a <ul> so our data is in the form of a list */}
-        {ingredients &&
-          ingredients.map((ingredient) => (
-            <option value={ingredient.name} key={ingredient.id} > {ingredient.name} </option>
-          ))}
-          
-      </select>
+      <div>
+  {/* Nesting the map within a <div> so our data is in the form of a group of checkboxes */}
+  {ingredients &&
+    ingredients.map((ingredient) => (
+      <div key={ingredient.id}>
+        <input
+          type="checkbox"
+          id={ingredient.id}
+          name={ingredient.name}
+          value={ingredient.name}
+          onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
+        />
+        <label htmlFor={ingredient.id}>{ingredient.name}</label>
+      </div>
+    ))}
+    </div>
       </div>
       <div>
         <ul>
@@ -112,9 +118,10 @@ function App() {
       console.log(recipe.id, recipe.recipe_name, recipe.image_url);
       return (
         <li key={recipe.id} style={{ margin: '0 10px', flexBasis: '25%' }}>
-          {<a href={recipe.recipe_url}> {recipe.recipe_name}</a>}
-          <p></p><img src={recipe.image_url} alt="cannot display" 
-          style={{ width: '400px', height: '400px' }} />
+          {recipe.recipe_name}
+          {<a href={recipe.recipe_url}> <img src={recipe.image_url} alt="cannot display" 
+          style={{ width: '400px', height: '400px' }} /></a>}
+          <p></p>
         </li>
       )
     })}
