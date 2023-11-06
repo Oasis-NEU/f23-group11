@@ -68,6 +68,13 @@ function App() {
     console.log("values",values);
   }
 
+  async function selectAllIngredients() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = true));
+    showUserIngredients();
+    showRecipes();
+  }
+
   return (
     <>
       <h1>Ingredients List</h1>
@@ -85,6 +92,9 @@ function App() {
 			state variables.
 			*/}
       <button onClick={() => addIngredient(name)}>Add Grocery</button>
+      <div>
+       <button onClick={() => selectAllIngredients()}>Select All</button>
+      </div>
       <div>
       <div>
   {/* Nesting the map within a <div> so our data is in the form of a group of checkboxes */}
@@ -111,6 +121,7 @@ function App() {
         </ul>
       </div>
       <div>
+        <p>Showing {recipes.length} recipes you can make!</p>
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
   {/* Nesting the map within a <ul> so our data is in the form of a list */}
   {recipes &&
