@@ -75,8 +75,16 @@ function App() {
     showRecipes();
   }
 
+  async function deselectAllIngredients() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
+    showUserIngredients();
+    showRecipes();
+  }
+
   return (
     <>
+    <div style={{ padding: '50px' }}>
       <h1>Ingredients List</h1>
       {/* 
 			Input field to enter the grocery name. On event change, we change the name state
@@ -96,21 +104,93 @@ function App() {
        <button onClick={() => selectAllIngredients()}>Select All</button>
       </div>
       <div>
+       <button onClick={() => deselectAllIngredients()}>Unselect All</button>
+      </div>
+      <div>
       <div>
   {/* Nesting the map within a <div> so our data is in the form of a group of checkboxes */}
-  {ingredients &&
-    ingredients.map((ingredient) => (
-      <div key={ingredient.id}>
-        <input
-          type="checkbox"
-          id={ingredient.id}
-          name={ingredient.name}
-          value={ingredient.name}
-          onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
-        />
-        <label htmlFor={ingredient.id}>{ingredient.name}</label>
-      </div>
-    ))}
+  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div class='column' style={{ flex: '1' }}>
+      <h1>Pantry</h1>
+      {ingredients &&
+        ingredients.map((ingredient) => (
+          <div key={ingredient.id}>
+            {ingredient.ingredientType === 'pantry' && (
+            <>
+              <input
+                type="checkbox"
+                id={ingredient.id}
+                name={ingredient.name}
+                value={ingredient.name}
+                onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
+              />
+              <label htmlFor={ingredient.id}>{ingredient.name}</label>
+            </>
+          )}
+          </div>
+        ))}
+    </div>
+    <div class='column' style={{ flex: '1' }}>
+      <h1>Dairy</h1>
+      {ingredients &&
+        ingredients.map((ingredient) => (
+          <div key={ingredient.id}>
+            {ingredient.ingredientType === 'dairy' && (
+            <>
+              <input
+                type="checkbox"
+                id={ingredient.id}
+                name={ingredient.name}
+                value={ingredient.name}
+                onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
+              />
+              <label htmlFor={ingredient.id}>{ingredient.name}</label>
+            </>
+          )}
+          </div>
+        ))}
+    </div>
+    <div class='column' style={{ flex: '1' }}>
+      <h1>Spices</h1>
+      {ingredients &&
+        ingredients.map((ingredient) => (
+          <div key={ingredient.id}>
+            {ingredient.ingredientType === 'spice' && (
+            <>
+              <input
+                type="checkbox"
+                id={ingredient.id}
+                name={ingredient.name}
+                value={ingredient.name}
+                onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
+              />
+              <label htmlFor={ingredient.id}>{ingredient.name}</label>
+            </>
+          )}
+          </div>
+        ))}
+    </div>
+    <div class='column' style={{ flex: '1' }}>
+      <h1>Fruits</h1>
+      {ingredients &&
+        ingredients.map((ingredient) => (
+          <div key={ingredient.id}>
+            {ingredient.ingredientType === 'fruit' && (
+            <>
+              <input
+                type="checkbox"
+                id={ingredient.id}
+                name={ingredient.name}
+                value={ingredient.name}
+                onChange={(e) => (showUserIngredients(e) && showRecipes(e))}
+              />
+              <label htmlFor={ingredient.id}>{ingredient.name}</label>
+            </>
+          )}
+          </div>
+        ))}
+    </div>
+  </div>
     </div>
       </div>
       <div>
@@ -138,7 +218,9 @@ function App() {
     })}
 </ul>
       </div>
+      </div>
     </>
+
   );
 }
 
