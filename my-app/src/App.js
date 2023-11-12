@@ -8,6 +8,14 @@ function App() {
   const [userIngredients, setUserIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
+  //setting for recipes
+  const [recipe, setRecipeName] = useState("");
+  const [recipeIngredients, setRecipeIngredients] = useState("");
+  const [url, setUrl] = useState("");
+  const [picUrl, setPicUrl] = useState("");
+  const [category, setCategory] = useState("");
+
+
   useEffect(() => {
     getIngredients();
   }, []); // "[]" signifies that this hook will only be run on the first page load

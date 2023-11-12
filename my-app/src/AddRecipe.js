@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function AddRecipe({
-    recipeName, setRecipeName, ingredients, setIngredients, url, setUrl, picUrl, setPicUrl, category, setCategory
+    recipeName, setRecipeName, recipeIngredients, setRecipeIngredients, url, setUrl, picUrl, setPicUrl, category, setCategory
 }) {
     return (
         <div className="input">
@@ -11,7 +11,7 @@ export default function AddRecipe({
               setShowOutput(true);
             }}
           >
-            <label htmlFor="form-photo">Photo: </label>
+            <label htmlFor="recipe-photo">Photo: </label>
             <input
               id="form-photo"
               type="file"
