@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+input[type="checkbox"] {
+  font-family: "Roboto", sans-serif;
+  transform: scale(1.5);
+  margin-right: 8px;
+  margin-bottom: 7px;
+  accent-color: pink;
+  mix-blend-mode: multiply;
+}
