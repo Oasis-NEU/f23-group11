@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import "./App.css"
+import AddRecipe from "./AddRecipe";
 
 function App() {
   const [name, setName] = useState(""); // Initialized as an empty string.
@@ -10,7 +11,7 @@ function App() {
 
   //setting for recipes
   const [recipe, setRecipeName] = useState("");
-  const [recipeIngredients, setRecipeIngredients] = useState("");
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
   const [url, setUrl] = useState("");
   const [picUrl, setPicUrl] = useState("");
   const [category, setCategory] = useState("");
@@ -69,6 +70,8 @@ function App() {
     }
   }
 
+
+
   async function showUserIngredients(e) {
     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
     var values = Array.from(checkboxes).map(({ value }) => value);
@@ -83,25 +86,31 @@ function App() {
     showRecipes();
   }
 
-  return (
-    <>
+  async function deselectAllIngredients() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
+    showUserIngredients();
+    showRecipes();
+  }
+
+  return ( <div className="App">  
+    <AddRecipe 
+      recipeName = {recipe}
+      setRecipeName = {setRecipeName}
+      recipeIngredients = {recipeIngredients}
+      setRecipeIngredients = {setRecipeIngredients}
+      url = {url}
+      setUrl = {setUrl}
+      picUrl = {picUrl}
+      setPicUrl = {setPicUrl}
+      category = {category}
+      setCategory = {setCategory}
+      />
+  
       <h1>Ingredients List</h1>
-      {/* 
-			Input field to enter the grocery name. On event change, we change the name state
-			variable to what is typed into the text field using the setName() state function.
-			*/}
-      <label>Name</label>
-      <input type="text" onChange={(e) => setName(e.target.value)} />
-      {/* 
-			Input field to enter the grocery price. On event change, we change the price state
-			variable to what is typed into the text field using the setPrice() state function.
-			*//*
-			Button, when clicked executes the postGrocery() function with the name and price
-			state variables.
-			*/}
-      <button onClick={() => addIngredient(name)}>Add Grocery</button>
       <div>
        <button onClick={() => selectAllIngredients()}>Select All</button>
+       <button onClick={() => deselectAllIngredients()}>Deselect All</button>
       </div>
       <div>
       <div>
@@ -120,14 +129,7 @@ function App() {
       </div>
     ))}
     </div>
-      </div>
-      <div>
-        <ul>
-          {userIngredients && userIngredients.map((ingredient) => 
-          <li key={ingredient.id} > 
-          {ingredient} </li> )}
-        </ul>
-      </div>
+    </div> 
       <div>
         <p>Showing {recipes.length} recipes you can make!</p>
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -146,8 +148,7 @@ function App() {
     })}
 </ul>
       </div>
-    </>
-  );
+  </div> );
 }
 
 export default App;
