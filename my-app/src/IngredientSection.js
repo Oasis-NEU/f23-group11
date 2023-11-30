@@ -34,7 +34,7 @@ export default function IngredientSection({
       }
 
     const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
-    return (<div className="column" style={{ flex: '1' }}>
+    return (<div className="column-1" style={{ flex: '1' }}>
     <div>
         <button className="button-1"  onClick={() => selectAllIngredients()}>Select All {formattedCategory}</button>
         <button className="button-1"  onClick={() => deselectAllIngredients()}>Deselect All {formattedCategory}</button>

@@ -1,6 +1,7 @@
 .App {
   text-align: left;
   padding-left: 20px;
+  
 }
 
 .App-logo {
@@ -15,14 +16,64 @@
 }
 
 .App-header {
-  background-color: #365798;
+  background-color: blue;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+.header {
+  text-align: center;
+  align-items: center;
+  font-size: 60px;
+  color: rgb(43, 15, 30);
+  font-family: "Roboto", sans-serif;
+}
+
+.logo {
+  vertical-align: -30px;
+  width: 10%;
+  height: 10%;
+  margin-right: 5px;
+  rotate: 355deg;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredients-section {
+  display: flex;
+  align-items: center;
+}
+
+.ingredients-heading {
+  flex: 1;
+  vertical-align: bottom;
+}
+
+.add-recipe-section {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px; 
+  padding: 10px;
+}
+
+.ingredient-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+body {
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: rgb(180, 206, 242);
 }
 
 .App-link {
@@ -47,35 +98,48 @@ input[type="checkbox"] {
   mix-blend-mode: multiply;
 }
 
-/* CSS */
+
+
 .button {
-  font-family: "Open Sans", sans-serif;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: rgb(215, 148, 200);
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
   cursor: pointer;
-  border: 3px solid;
-  padding: 0.25em 0.5em;
-  background-color: white;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
   position: relative;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
   user-select: none;
-  margin-bottom: 10px;
-  margin-right: 10px;
   -webkit-user-select: none;
   touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-1:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
 }
 
 .button:active {
-  box-shadow: 0px 0px 0px 0px;
-  top: 5px;
-  left: 5px;
-}
-
-@media (min-width: 768px) {
-  .button {
-    padding: 0.25em 0.75em;
-  }
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
 }

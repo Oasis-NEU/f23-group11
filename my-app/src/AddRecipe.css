@@ -1,0 +1,31 @@
+.input {
+    background-color: rgb(218, 194, 233);
+    border: 5px solid white;
+    width: 800px; 
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .column {
+    flex: 1;
+    margin-right: 20px;
+    border: none;
+  }
+  
+  .column:last-child {
+    margin-right: 0;
+  }
+  
+  .button {
+    margin-top: 10px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 2px;
+  }
+  
+  .input input {
+    display: inline-block;
+    vertical-align: middle;
+  }

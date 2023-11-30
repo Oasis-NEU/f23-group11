@@ -4,6 +4,7 @@ import "./App.css";
 import AddRecipe from "./AddRecipe";
 import IngredientSection from "./IngredientSection";
 import RecipeDisplay from "./RecipeDisplay";
+import logo from "./logo.png";
 
 function App() {
   const [name, setName] = useState("");
@@ -92,67 +93,61 @@ function App() {
 
   return (
     <div>
-    <AddRecipe 
-      recipeName = {recipe}
-      setRecipeName = {setRecipeName}
-      recipeIngredients = {recipeIngredients}
-      setRecipeIngredients = {setRecipeIngredients}
-      url = {url}
-      setUrl = {setUrl}
-      picUrl = {picUrl}
-      setPicUrl = {setPicUrl}
-      category = {category}
-      setCategory = {setCategory}
-    />
-        <h1>Ingredients List <div>
-          <button className="button" onClick={() => selectAllIngredients()}>Select All</button>
-          <button className="button" onClick={() => deselectAllIngredients()}>Deselect All</button>
-        </div></h1>
-        
-        <div>
-          <div>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <IngredientSection
-                ingredients = {ingredients}
-                showUserIngredients = {showUserIngredients}
-                category = 'pantry'
-                showRecipes = {showRecipes}
-                >
-
-                </IngredientSection>
-              <IngredientSection
-                ingredients = {ingredients}
-                showUserIngredients = {showUserIngredients}
-                category = 'dairy'
-                showRecipes = {showRecipes}
-                >
-
-                </IngredientSection>  
-                <IngredientSection
-                ingredients = {ingredients}
-                showUserIngredients = {showUserIngredients}
-                category = 'spice'
-                showRecipes = {showRecipes}
-                >
-
-                </IngredientSection>  
-                <IngredientSection
-                ingredients = {ingredients}
-                showUserIngredients = {showUserIngredients}
-                category = 'fruit'
-                showRecipes = {showRecipes}
-                >
-
-                </IngredientSection>  
-            </div>
+      <h1 className="header"><img src={logo} alt="Logo" className="logo" /> Dorm Delights</h1>
+      <div className="content">
+        <div className="ingredients-section">
+          <h1 className="ingredients-heading">Ingredients List 
+          <div className="button-section">
+            <button className="button" onClick={selectAllIngredients}>Select All</button>
+            <button className="button" onClick={deselectAllIngredients}>Deselect All</button>
+          </div>
+          </h1>
+          <div className="add-recipe-container">
+            <AddRecipe
+              recipeName={recipe}
+              setRecipeName={setRecipeName}
+              recipeIngredients={recipeIngredients}
+              setRecipeIngredients={setRecipeIngredients}
+              url={url}
+              setUrl={setUrl}
+              picUrl={picUrl}
+              setPicUrl={setPicUrl}
+              category={category}
+              setCategory={setCategory}
+              style={{ flexGrow: 1 }}
+            />
           </div>
         </div>
-          <RecipeDisplay
-          recipes = {recipes}
-          showRecipes = {showRecipes}>
-        
-          </RecipeDisplay>
-        </div>  
+        <p> </p>
+        <div className="ingredient-sections">
+          <IngredientSection
+            ingredients={ingredients}
+            showUserIngredients={showUserIngredients}
+            category='pantry'
+            showRecipes={showRecipes}
+          />
+          <IngredientSection
+            ingredients={ingredients}
+            showUserIngredients={showUserIngredients}
+            category='dairy'
+            showRecipes={showRecipes}
+          />
+          <IngredientSection
+            ingredients={ingredients}
+            showUserIngredients={showUserIngredients}
+            category='spice'
+            showRecipes={showRecipes}
+          />
+          <IngredientSection
+            ingredients={ingredients}
+            showUserIngredients={showUserIngredients}
+            category='fruit'
+            showRecipes={showRecipes}
+          />
+        </div>
+      </div>
+      <RecipeDisplay recipes={recipes} showRecipes={showRecipes} />
+    </div>
   );
 }
 

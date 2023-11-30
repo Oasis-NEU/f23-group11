@@ -21,9 +21,9 @@ export default function RecipeDisplay({ recipes, showRecipes }) {
                       console.error(e);
                     }}
                   />
-                  <div className="card-category">Recipe</div>
+                  <div className="card-category">{recipe.recipe_name}</div>
                   <div className="card-description">
-                    <p>{recipe.recipe_name}</p>
+                    <p>{recipe.dessert_category}</p>
                   </div>
                   <a className="card-link" href={recipe.recipe_url}></a>
                 </div>

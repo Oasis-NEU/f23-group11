@@ -1,45 +1,57 @@
 
-/* CSS */
+
 .button-1 {
-    font-family: "Open Sans", sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: rgb(215, 148, 200);
-    cursor: pointer;
-    border: 3px solid;
-    padding: 0.25em 0.5em;
-    background-color: white;
-    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-    position: relative;
-    user-select: none;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .button-1:active {
-    box-shadow: 0px 0px 0px 0px;
-    top: 5px;
-    left: 5px;
-  }
-  
-  @media (min-width: 768px) {
-    .button-1 {
-      padding: 0.2em 0.6em;
-    }
-  }
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-1:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-1:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
 
   .IngredientSection-header {
     margin-bottom: 5px;
     display: flex;
   }
   
-  .column {
-    background-color: pink;
-    border: 5px solid #cc6699; /* Replace #cc6699 with your desired darker pink color */
+  .column-1 {
+    background-color: rgb(218, 194, 233);
+    border: 5px solid rgb(255, 255, 255); /* Replace #cc6699 with your desired darker pink color */
     padding: 10px;
     margin-bottom: 10px;
   }

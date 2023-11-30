@@ -1,5 +1,6 @@
 import React from "react";
 import {supabase} from "./supabaseClient";
+import "./AddRecipe.css";
 
 export default function AddRecipe({
   recipeName, 
@@ -14,35 +15,33 @@ export default function AddRecipe({
   setCategory
 }) {
   return (
-    <div className="input">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault(); // stop submit from reloading the page
-        }}
-      >
-        <label htmlFor="recipe-name">
-            Recipe Name:
+    <div className="input" >
+      <div className="column">
+        <label htmlFor="recipe-name" className="label" >
+          Recipe Name:
         </label>
         <input
-        id="recipe-name"
-        type="text"
-        value={recipeName}
-        onChange={(e) => setRecipeName(e.target.value)}
-        required
+          id="recipe-name"
+          type="text"
+          value={recipeName}
+          onChange={(e) => setRecipeName(e.target.value)}
+          required
         />
 
-        <label htmlFor="recipe-ingredients">
-            Recipe Ingredients: 
+        <label className="label" htmlFor="recipe-ingredients">
+          Recipe Ingredients: 
         </label>
         <textarea
-        id="recipe-ingredients"
-        type="textarea"
-        value={recipeIngredients.join("\n")}
-        onChange={(e) => setRecipeIngredients(e.target.value.split("\n"))}
-        required
+          id="recipe-ingredients"
+          type="textarea"
+          value={recipeIngredients.join("\n")}
+          onChange={(e) => setRecipeIngredients(e.target.value.split("\n"))}
+          required
         />
-    
-        <label htmlFor="recipe-photo">Photo URL: </label>
+      </div>
+
+      <div className="column">
+        <label className="label" htmlFor="recipe-photo">Photo URL: </label>
         <input
           id="recipe-photo"
           type="url"
@@ -51,7 +50,7 @@ export default function AddRecipe({
           onChange={(e) => setPicUrl(e.target.value)}
         />
 
-        <label htmlFor="recipe-link">URL to recipe: </label>
+        <label className="label" htmlFor="recipe-link">URL to recipe: </label>
         <input
           id="recipe-link"
           type="url"
@@ -60,23 +59,23 @@ export default function AddRecipe({
           onChange={(e) => setUrl(e.target.value)}
         />
 
-        <label htmlFor="recipe-category">
-            Category:
+        <label className="label" htmlFor="recipe-category">
+          Category:
         </label>
         <input
-        id="recipe-category"
-        type="text"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        required
+          id="recipe-category"
+          type="text"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
         />
+      </div>
 
-      <button class="button" type="submit" onClick={() => {
-          console.log("type: ", typeof recipeIngredients)
-          console.log("here: ", recipeName, recipeIngredients, url, picUrl, category);
-          addARecipe(recipeName, recipeIngredients, url, picUrl, category);
-        }}>Add Recipe</button>  
-      </form>
+      <button className="button" type="submit" onClick={() => {
+        console.log("type: ", typeof recipeIngredients)
+        console.log("here: ", recipeName, recipeIngredients, url, picUrl, category);
+        addARecipe(recipeName, recipeIngredients, url, picUrl, category);
+      }}>Add Recipe</button>
     </div>
   );
 }
