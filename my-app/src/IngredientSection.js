@@ -1,4 +1,6 @@
 import React from "react";
+import "./IngredientSection.css";
+
 
 export default function IngredientSection({
     ingredients,
@@ -34,10 +36,10 @@ export default function IngredientSection({
     const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
     return (<div className="column" style={{ flex: '1' }}>
     <div>
-        <button onClick={() => selectAllIngredients()}>Select All {formattedCategory}</button>
-        <button onClick={() => deselectAllIngredients()}>Deselect All {formattedCategory}</button>
+        <button className="button-1"  onClick={() => selectAllIngredients()}>Select All {formattedCategory}</button>
+        <button className="button-1"  onClick={() => deselectAllIngredients()}>Deselect All {formattedCategory}</button>
     </div>
-    <h1>{formattedCategory}</h1>
+    <h1 className="IngredientSection-header">{formattedCategory}</h1>
     {ingredients &&
       ingredients.map((ingredient) => (
         <div key={ingredient.id}>

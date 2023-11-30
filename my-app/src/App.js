@@ -104,11 +104,11 @@ function App() {
       category = {category}
       setCategory = {setCategory}
     />
-        <h1>Ingredients List</h1>
-        <div>
-          <button onClick={() => selectAllIngredients()}>Select All</button>
-          <button onClick={() => deselectAllIngredients()}>Deselect All</button>
-        </div>
+        <h1>Ingredients List <div>
+          <button className="button" onClick={() => selectAllIngredients()}>Select All</button>
+          <button className="button" onClick={() => deselectAllIngredients()}>Deselect All</button>
+        </div></h1>
+        
         <div>
           <div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>

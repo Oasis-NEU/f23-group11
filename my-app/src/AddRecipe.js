@@ -71,7 +71,7 @@ export default function AddRecipe({
         required
         />
 
-      <button type="submit" onClick={() => {
+      <button class="button" type="submit" onClick={() => {
           console.log("type: ", typeof recipeIngredients)
           console.log("here: ", recipeName, recipeIngredients, url, picUrl, category);
           addARecipe(recipeName, recipeIngredients, url, picUrl, category);
