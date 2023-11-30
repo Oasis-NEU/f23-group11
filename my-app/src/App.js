@@ -1,56 +1,158 @@
-import logo from './logo.svg';
-import './App.css';
 import { useState, useEffect } from "react";
-
-import { supabase } from './supabase';
+import { supabase } from "./supabaseClient";
+import "./App.css";
+import AddRecipe from "./AddRecipe";
+import IngredientSection from "./IngredientSection";
+import RecipeDisplay from "./RecipeDisplay";
 
 function App() {
-
+  const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [userIngredients, setUserIngredients] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  useEffect (() => {
+  // Setting for recipes
+  const [recipe, setRecipeName] = useState("");
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
+  const [url, setUrl] = useState("");
+  const [picUrl, setPicUrl] = useState("");
+  const [category, setCategory] = useState("");
+
+  useEffect(() => {
     getIngredients();
-  }, [])
+  }, []);
 
   async function getIngredients() {
     try {
-      const { data, error } = await supabase // Destructure the Supabase call
-        .from("Ingredients") // From the "Groceries" table
-        .select("*"); // Select (fetch) everything
-      if (error) throw error; // If there is an error, throw it
+      const { data, error } = await supabase
+        .from("Ingredients")
+        .select("*");
+      if (error) throw error;
       if (data != null) {
-        // If there is data fetched
-        setIngredients(data); // Set our groceries state variable to the data
+        setIngredients(data);
       }
     } catch (error) {
-      alert(error); // If an error is caught, alert it on the client
+      alert(error);
     }
   }
 
-  return (
-    
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          App
-        </p>
-        
-      </header>
+  async function showRecipes(e) {
+    var options = document.querySelectorAll('input[type=checkbox]:checked');
+    var values = Array.from(options).map(({ value }) => value.toString());
+    try {
+      const { data, error } = await supabase
+        .from("Recipes")
+        .select('*')
+        .containedBy('ingredients', values);
+      console.log("options recipes", options);
+      console.log("values recipes", values);
+      console.log("recipes", data);
+      if (error) throw error;
+      if (data != null) {
+        setRecipes(data);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
 
-      <div>
-      <h1>Ingredient List</h1>
-      <ul>
-        {ingredients ? (
-          ingredients.map((ingredients) => {
-          return <li key={ingredients.id}>{ingredients.name}</li>
-        })
-      ) : (
-        <p>Loading...</p>
-      )}
-      </ul>
-    </div>
-    </div>
+  async function addIngredient(name) {
+    try {
+      const { data, error } = await supabase
+        .from("Ingredients")
+        .insert({ name: name })
+        .single();
+      if (error) throw error;
+      window.location.reload();
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  async function showUserIngredients(e) {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+    var values = Array.from(checkboxes).map(({ value }) => value);
+    setUserIngredients(values);
+    console.log("values", values);
+  }
+
+  async function selectAllIngredients() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = true));
+    showUserIngredients();
+    showRecipes();
+  }
+
+  async function deselectAllIngredients() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
+    showUserIngredients();
+    showRecipes();
+  }
+
+  return (
+    <div>
+    <AddRecipe 
+      recipeName = {recipe}
+      setRecipeName = {setRecipeName}
+      recipeIngredients = {recipeIngredients}
+      setRecipeIngredients = {setRecipeIngredients}
+      url = {url}
+      setUrl = {setUrl}
+      picUrl = {picUrl}
+      setPicUrl = {setPicUrl}
+      category = {category}
+      setCategory = {setCategory}
+    />
+        <h1>Ingredients List <div>
+          <button className="button" onClick={() => selectAllIngredients()}>Select All</button>
+          <button className="button" onClick={() => deselectAllIngredients()}>Deselect All</button>
+        </div></h1>
+        
+        <div>
+          <div>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <IngredientSection
+                ingredients = {ingredients}
+                showUserIngredients = {showUserIngredients}
+                category = 'pantry'
+                showRecipes = {showRecipes}
+                >
+
+                </IngredientSection>
+              <IngredientSection
+                ingredients = {ingredients}
+                showUserIngredients = {showUserIngredients}
+                category = 'dairy'
+                showRecipes = {showRecipes}
+                >
+
+                </IngredientSection>  
+                <IngredientSection
+                ingredients = {ingredients}
+                showUserIngredients = {showUserIngredients}
+                category = 'spice'
+                showRecipes = {showRecipes}
+                >
+
+                </IngredientSection>  
+                <IngredientSection
+                ingredients = {ingredients}
+                showUserIngredients = {showUserIngredients}
+                category = 'fruit'
+                showRecipes = {showRecipes}
+                >
+
+                </IngredientSection>  
+            </div>
+          </div>
+        </div>
+          <RecipeDisplay
+          recipes = {recipes}
+          showRecipes = {showRecipes}>
+        
+          </RecipeDisplay>
+        </div>  
   );
 }
 

@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  text-align: left;
+  padding-left: 20px;
 }
 
 .App-logo {
@@ -14,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #365798;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,5 +35,47 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+input[type="checkbox"] {
+  font-family: "Roboto", sans-serif;
+  transform: scale(1.5);
+  margin-right: 8px;
+  margin-bottom: 7px;
+  accent-color: pink;
+  mix-blend-mode: multiply;
+}
+
+/* CSS */
+.button {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgb(215, 148, 200);
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  background-color: white;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button {
+    padding: 0.25em 0.75em;
   }
 }
